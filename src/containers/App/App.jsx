@@ -4,24 +4,32 @@
 
 // React
 import React from 'react';
-import { ConnectedRouter } from 'react-router-redux';
-import { Provider } from 'react-redux';
-import { Route } from 'react-router-dom';
-import { configureStore, history } from '../../store';
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 // Components
+import Header from '../Header/Header';
 import Home from '../Home/Home';
-
-const store = configureStore();
+import Login from '../../components/Login/Login';
+import Form from '../../components/Form/Form';
+import Administrative from '../Administrative/AdministrativePage';
 
 const App = () => (
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <div className="application-container">
-        <Route exact path="/" component={Home} />
+  <Router>
+    <MuiThemeProvider>
+      <div id="application-wrapper">
+        <main id="main" role="main">
+          <Header />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/form" component={Form} />
+            <Route exact path="/administrative" component={Administrative} />
+          </Switch>
+        </main>
       </div>
-    </ConnectedRouter>
-  </Provider>
+    </MuiThemeProvider>
+  </Router>
 );
 
 export default App;
