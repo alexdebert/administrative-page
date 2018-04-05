@@ -9,10 +9,10 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 // Components
 import Header from '../Header/Header';
-import Home from '../Home/Home';
-import Login from '../../components/Login/Login';
+import HomePage from '../HomePage/HomePage';
+import LoginPage from '../LoginPage/LoginPage';
 import Form from '../../components/Form/Form';
-import Administrative from '../Administrative/AdministrativePage';
+import Administrative from '../AdministrativePage/AdministrativePage';
 
 const App = () => (
   <Router>
@@ -21,8 +21,8 @@ const App = () => (
         <main id="main" role="main">
           <Header />
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/login" component={Login} />
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/login" component={LoginPage} />
             <Route exact path="/form" component={Form} />
             <Route exact path="/administrative" component={Administrative} />
           </Switch>

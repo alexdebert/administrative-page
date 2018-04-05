@@ -1,8 +1,12 @@
+/**
+ * @overview Home Page.
+ */
+
 // React
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Home = () => (
+const HomePage = () => (
   <div className="home-wrapper">
     <h2>What do you want to do?</h2>
     <Link to="/login">Login as Administrator</Link>
@@ -10,4 +14,4 @@ const Home = () => (
   </div>
 );
 
-export default Home;
+export default HomePage;
