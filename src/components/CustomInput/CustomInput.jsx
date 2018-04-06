@@ -1,5 +1,5 @@
 /**
- * @overview Custom input with field validation.
+ * @overview Custom input.
  */
 
 import React from 'react';
@@ -25,10 +25,7 @@ const CustomInput = ({
 
 
 CustomInput.propTypes = {
-  input: PropTypes.shape({
-    username: PropTypes.string,
-    value: PropTypes.string,
-  }),
+  input: PropTypes.shape({}),
   meta: PropTypes.shape({
     touched: PropTypes.bool,
     error: PropTypes.string,
@@ -38,10 +35,7 @@ CustomInput.propTypes = {
 };
 
 CustomInput.defaultProps = {
-  input: {
-    username: '',
-    value: '',
-  },
+  input: {},
   meta: {
     touched: false,
     error: '',

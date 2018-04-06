@@ -14,6 +14,9 @@ import LoginPage from '../LoginPage/LoginPage';
 import Form from '../Form/Form';
 import Administrative from '../AdministrativePage/AdministrativePage';
 
+// Styles
+import './App.scss';
+
 const App = () => (
   <Router>
     <MuiThemeProvider>

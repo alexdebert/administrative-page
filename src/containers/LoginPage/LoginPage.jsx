@@ -8,6 +8,7 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
 // Components
+import RaisedButton from 'material-ui/RaisedButton';
 import CustomInput from '../../components/CustomInput/CustomInput';
 
 // Actions
@@ -16,19 +17,8 @@ import { signInUser } from '../../actions/authActions';
 // Styles
 import './LoginPage.scss';
 
-const validate = (values) => {
-  const errors = {};
-
-  if (!values.username) {
-    errors.username = 'Please enter a username.';
-  }
-
-  if (!values.password) {
-    errors.password = 'Please enter a password.';
-  }
-
-  return errors;
-};
+// Validation
+import { validate } from '../formFieldsValidation';
 
 class LoginPage extends React.Component {
   constructor() {
@@ -41,13 +31,14 @@ class LoginPage extends React.Component {
   }
 
   render() {
+    const isPrimary = true;
     return (
-      <div className="Login">
+      <div className="Login__container">
         <h2 className="text-center">Log In</h2>
         <form className="Login__form" onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
           <Field className="Login__field" name="username" label="Username" component={CustomInput} type="text" />
           <Field className="Login__field" name="password" label="Password" component={CustomInput} type="password" />
-          <button action="submit" className="Login__button btn btn-primary">Sign In</button>
+          <RaisedButton className="Login__button" label="Sign In" type="submit" primary={isPrimary} />
         </form>
       </div>
     );

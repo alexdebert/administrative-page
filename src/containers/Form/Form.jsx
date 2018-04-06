@@ -8,14 +8,14 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
 // Components
+import RaisedButton from 'material-ui/RaisedButton';
 import CustomInput from '../../components/CustomInput/CustomInput';
 
-// Actions
-import { signInUser } from '../../actions/authActions';
+// Styles
+import './Form.scss';
 
-const validate = (values) => {
-  //TODO
-};
+// Validation
+import { validate } from '../formFieldsValidation';
 
 class Form extends React.Component {
   constructor() {
@@ -24,16 +24,18 @@ class Form extends React.Component {
   }
 
   handleFormSubmit(values) {
-    //TODO
-    console.log(values)
+    console.log(values);
+    console.log(this);
   }
 
   render() {
+    const isPrimary = true;
+    const isMultiLine = true;
     return (
-      <div className="CustomerForm">
+      <div className="CustomerForm__container">
         <h2 className="text-center">Customer Form</h2>
-        <form className="CustomerForm__container" onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
-          <Field className="CustomerCustomerForm__field" name="firstName" label="First Name" component={CustomInput} type="text" />
+        <form className="CustomerForm" onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
+          <Field className="CustomerForm__field" name="firstName" label="First Name" component={CustomInput} type="text" />
           <Field className="CustomerForm__field" name="lastName" label="Last Name" component={CustomInput} type="text" />
           <Field className="CustomerForm__field" name="email" label="email" component={CustomInput} type="text" />
           <Field className="CustomerForm__field" name="phoneNumber" label="Phone Number" component={CustomInput} type="text" />
@@ -47,10 +49,10 @@ class Form extends React.Component {
             label="Comments"
             component={CustomInput}
             type="text"
-            multiLine="true"
+            multiLine={isMultiLine}
             rows={2}
           />
-          <button action="submit" className="Login__button btn btn-primary">Submit</button>
+          <RaisedButton className="CustomerForm__button" label="Submit" type="submit" primary={isPrimary} />
         </form>
       </div>
     );

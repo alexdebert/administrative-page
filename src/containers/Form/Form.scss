@@ -1,8 +1,8 @@
 /**
- * @overview Login Page styles.
+ * @overview Customer Form Page styles.
  */
 
-.Login__container {
+.CustomerForm__container {
   margin: 0 auto;
   width: 30%;
 
@@ -10,16 +10,15 @@
     text-align: center;
   }
 }
-
-.Login__form {
+.CustomerForm {
   display: flex;
   flex-direction: column;
 }
 
-.Login__field {
+.CustomerForm__field {
   width: 100%!important;
 }
 
-.Login__button {
+.CustomerForm__button {
   margin-top: 5%;
 }
