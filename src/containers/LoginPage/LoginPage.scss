@@ -1,0 +1,21 @@
+/**
+ * @overview Login Page styles.
+ */
+
+.Login {
+  margin: 0 auto;
+  width: 30%;
+}
+
+.Login__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.Login__field {
+  width: 100%!important;
+}
+
+.Login__button {
+  margin-top: 5%;
+}

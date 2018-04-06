@@ -1,13 +1,11 @@
 /**
- * @overview Login page.
+ * @overview Login Page.
  */
 
-// React
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-
 
 // Components
 import CustomInput from '../../components/CustomInput/CustomInput';
@@ -15,11 +13,14 @@ import CustomInput from '../../components/CustomInput/CustomInput';
 // Actions
 import { signInUser } from '../../actions/authActions';
 
+// Styles
+import './LoginPage.scss';
+
 const validate = (values) => {
   const errors = {};
 
   if (!values.username) {
-    errors.email = 'Please enter a username.';
+    errors.username = 'Please enter a username.';
   }
 
   if (!values.password) {
@@ -29,7 +30,7 @@ const validate = (values) => {
   return errors;
 };
 
-class LoginPage extends Component {
+class LoginPage extends React.Component {
   constructor() {
     super();
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -41,15 +42,13 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="col-md-6 col-md-offset-3">
-          <h2 className="text-center">Log In</h2>
-          <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
-            <Field name="username" component={CustomInput} onChange={this.handleChange} type="text" label="Username" />
-            <Field name="password" component={CustomInput} type="password" label="Password" />
-            <button action="submit" className="btn btn-primary">Sign In</button>
-          </form>
-        </div>
+      <div className="Login">
+        <h2 className="text-center">Log In</h2>
+        <form className="Login__form" onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
+          <Field className="Login__field" name="username" label="Username" component={CustomInput} type="text" />
+          <Field className="Login__field" name="password" label="Password" component={CustomInput} type="password" />
+          <button action="submit" className="Login__button btn btn-primary">Sign In</button>
+        </form>
       </div>
     );
   }

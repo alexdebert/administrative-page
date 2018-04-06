@@ -15,7 +15,7 @@ const config = {
 
 	output: {
 		path: path.resolve(__dirname, OUTPUT_PATH),
-		filename: '[name].[chunkhash].js'
+		filename: 'bundle.js'
 	},
 
 	module: {
@@ -38,43 +38,18 @@ const config = {
 					}
 				]
 			},
-			{
-				test: /app\.scss$/,
-				use: [
-					{
-						loader: 'style-loader'
-					}, {
-						loader: 'css-loader'
-					}, {
-						loader: 'postcss-loader',
-						options: {
-							plugins: function() {
-								return [require('autoprefixer')]
-							}
-						}
-					}, {
-						loader: 'sass-loader'
-					}
-				]
-			},
-			{
-				test: /\.scss$/,
-				exclude: /app\.scss$/,
-				use: [
-					{
-						loader: 'raw-loader'
-					}, {
-						loader: 'postcss-loader',
-						options: {
-							plugins: function() {
-								return [require('autoprefixer')]
-							}
-						}
-					}, {
-						loader: 'sass-loader'
-					},
-				]
-			},
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: 'style-loader'
+          }, {
+            loader: 'css-loader'
+          },{
+            loader: 'sass-loader'
+          }
+        ]
+      },
 			{
 				test: /\.css$/,
 				use: ['style-loader', 'css-loader']

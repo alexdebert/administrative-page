@@ -1,24 +1,28 @@
+/**
+ * @overview Custom input with field validation.
+ */
+
 import React from 'react';
 import PropTypes from 'prop-types';
+import TextField from 'material-ui/TextField';
 
-const CustomInput = (props) => {
-  const { input } = props;
-  const { meta } = props;
-  const { label } = props;
-  const { type } = props;
+const CustomInput = ({
+  input,
+  label,
+  type,
+  meta: { touched, error },
+  ...custom
+}) => (
+  <TextField
+    type={type}
+    hintText={label}
+    floatingLabelText={label}
+    errorText={touched && error}
+    {...input}
+    {...custom}
+  />
+);
 
-  return (
-    <fieldset className={`form-group ${meta.touched && meta.error ? 'has-error' : ''}`}>
-      <label htmlFor={label} className="control-label">
-        <div>
-          <input {...input} placeholder={label} className="form-control" type={type} />
-          {meta.touched && meta.error && <div className="help-block">{meta.error}</div>}
-        </div>
-        {label}
-      </label>
-    </fieldset>
-  );
-};
 
 CustomInput.propTypes = {
   input: PropTypes.shape({
