@@ -11,7 +11,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Header from '../Header/Header';
 import HomePage from '../HomePage/HomePage';
 import LoginPage from '../LoginPage/LoginPage';
-import Form from '../../components/Form/Form';
+import Form from '../Form/Form';
 import Administrative from '../AdministrativePage/AdministrativePage';
 
 const App = () => (

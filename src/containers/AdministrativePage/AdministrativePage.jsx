@@ -1,3 +1,7 @@
+/**
+ * @overview Administrative Page.
+ */
+
 import React from 'react';
 
 const Administrative = () => (
