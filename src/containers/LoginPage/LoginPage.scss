@@ -11,6 +11,16 @@
   }
 }
 
+.LoginMessage {
+  text-align: center;
+}
+
+.LoginMessage--error {
+  font-size: 20px;
+  line-height: 12px;
+  color: rgb(244, 67, 54);
+}
+
 .Login__form {
   display: flex;
   flex-direction: column;

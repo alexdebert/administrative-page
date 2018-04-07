@@ -2,7 +2,7 @@
  * @overview Authentication reducer.
  */
 
-import { AUTH_USER, SIGN_OUT_USER, AUTH_ERROR } from '../actions/authActions';
+import { LOGIN_SUCCESS, SIGN_OUT_USER, LOGIN_ERROR } from '../actions/authActions';
 
 const initialState = {
   authenticated: false,
@@ -11,7 +11,7 @@ const initialState = {
 
 export default function auth(state = initialState, action) {
   switch (action.type) {
-    case AUTH_USER:
+    case LOGIN_SUCCESS:
       return {
         ...state,
         authenticated: true,
@@ -23,10 +23,10 @@ export default function auth(state = initialState, action) {
         authenticated: false,
         error: null,
       };
-    case AUTH_ERROR:
+    case LOGIN_ERROR:
       return {
         ...state,
-        error: action.payload.message,
+        error: action.payload,
       };
     default:
       return state;

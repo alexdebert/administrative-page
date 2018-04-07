@@ -2,14 +2,26 @@
  * @overview Header.
  */
 
+// Core
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+// Styles
+import { white } from 'material-ui/styles/colors';
+
+// Components
 import AppBar from 'material-ui/AppBar';
 import { Link } from 'react-router-dom';
 import IconButton from 'material-ui/IconButton';
 import HomeIcon from 'material-ui/svg-icons/action/home';
-import { white } from 'material-ui/styles/colors';
+import LoggedAppBar from '../LoggedAppBar/LoggedAppBar';
+import LoginAppBar from '../../components/LoginAppBar/LoginAppBar';
 
-const homeIcon = (
+// Actions
+import { logoutUser } from '../../actions/authActions';
+
+const HomeIconAppBar = (
   <Link to="/">
     <IconButton>
       <HomeIcon color={white} />
@@ -17,11 +29,26 @@ const homeIcon = (
   </Link>
 );
 
-const Header = () => (
-  <AppBar
-    title="Administrative Page"
-    iconElementLeft={homeIcon}
-  />
-);
+const Header = (props) => {
+  const isAuthenticated = props.authenticated;
+  const icon = isAuthenticated ? (<LoggedAppBar />) : (<LoginAppBar />);
+  return (
+    <AppBar
+      title="Administrative Page"
+      iconElementLeft={HomeIconAppBar}
+      iconElementRight={icon}
+    />
+  );
+};
 
-export default Header;
+Header.propTypes = {
+  authenticated: PropTypes.bool.isRequired,
+};
+
+function mapStateToProps(state) {
+  return {
+    authenticated: state.auth.authenticated,
+  };
+}
+
+export default connect(mapStateToProps, { logoutUser })(Header);

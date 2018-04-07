@@ -4,35 +4,60 @@
 
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:9001/users/';
-
 export const SIGN_OUT_USER = 'SIGN_OUT_USER';
-export const AUTH_ERROR = 'AUTH_ERROR';
-export const AUTH_USER = 'AUTH_USER';
+export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 
-export function signInUser(credentials) {
+const BASE_URL = 'http://localhost:9001/users/';
+const mockDataError = 'Invalid Username or Password';
+
+function validateLogin(data, credentials) {
+  const validUsername = data.username;
+  const validPassword = data.password;
+  const enteredUsername = credentials.username;
+  const enteredPassword = credentials.password;
+
+  if (validUsername !== enteredUsername || validPassword !== enteredPassword) {
+    throw mockDataError;
+  }
+}
+
+function loginWithUserNameAndPassword(credentials) {
   return axios.get(BASE_URL)
     .then((response) => {
-      console.log('r', response);
-      console.log('c', credentials);
+      validateLogin(response.data[0], credentials);
     });
 }
 
-export function signOutUser() {
+export function logoutUser() {
   return {
     type: SIGN_OUT_USER,
   };
 }
 
-export function authUser() {
+export function loginSuccess() {
   return {
-    type: AUTH_USER,
+    type: LOGIN_SUCCESS,
   };
 }
 
-export function authError(error) {
+export function loginError(error) {
   return {
-    type: AUTH_ERROR,
+    type: LOGIN_ERROR,
     payload: error,
   };
 }
+
+export function loginUser(credentials) {
+  return function (dispatch) {
+    loginWithUserNameAndPassword(credentials)
+      .then(() => {
+        dispatch(loginSuccess());
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(loginError(error));
+      });
+  };
+}
+

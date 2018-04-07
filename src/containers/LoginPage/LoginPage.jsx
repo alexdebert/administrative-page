@@ -2,7 +2,7 @@
  * @overview Login Page.
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
@@ -12,7 +12,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import CustomInput from '../../components/CustomInput/CustomInput';
 
 // Actions
-import { signInUser } from '../../actions/authActions';
+import { loginUser } from '../../actions/authActions';
 
 // Styles
 import './LoginPage.scss';
@@ -20,14 +20,25 @@ import './LoginPage.scss';
 // Validation
 import { validate } from '../formFieldsValidation';
 
-class LoginPage extends React.Component {
+class LoginPage extends Component {
   constructor() {
     super();
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
   handleFormSubmit(values) {
-    this.props.signInUser(values);
+    this.props.loginUser(values);
+  }
+
+  renderAuthenticationError() {
+    if (this.props.authenticationError) {
+      return (
+        <div className="LoginMessage">
+          <span className="LoginMessage--error">{ this.props.authenticationError }</span>
+        </div>
+      );
+    }
+    return null;
   }
 
   render() {
@@ -35,6 +46,7 @@ class LoginPage extends React.Component {
     return (
       <div className="Login__container">
         <h2 className="text-center">Log In</h2>
+        { this.renderAuthenticationError() }
         <form className="Login__form" onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
           <Field className="Login__field" name="username" label="Username" component={CustomInput} type="text" />
           <Field className="Login__field" name="password" label="Password" component={CustomInput} type="password" />
@@ -46,11 +58,22 @@ class LoginPage extends React.Component {
 }
 
 LoginPage.propTypes = {
-  signInUser: PropTypes.func.isRequired,
+  loginUser: PropTypes.func.isRequired,
+  authenticationError: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
 };
 
-export default connect(null, { signInUser })(reduxForm({
+LoginPage.defaultProps = {
+  authenticationError: '',
+};
+
+function mapStateToProps(state) {
+  return {
+    authenticationError: state.auth.error,
+  };
+}
+
+export default connect(mapStateToProps, { loginUser })(reduxForm({
   form: 'login',
   validate,
 })(LoginPage));

@@ -28,7 +28,7 @@ export function validate(values) {
     errors.email = 'Please enter a valid email address';
   }
 
-  if (!/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/i.test(values.phoneNumber)) {
+  if (!/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/i.test(values.phoneNumber) && values.phoneNumber) {
     errors.phoneNumber = 'Please enter a valid phone number.';
   }
 
@@ -40,7 +40,7 @@ export function validate(values) {
     errors.city = 'Please enter a city.';
   }
 
-  if (!/^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$/i.test(values.postalCode)) {
+  if (!/^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$/i.test(values.postalCode) && values.postalCode) {
     errors.postalCode = 'Please enter a valid postal code.';
   }
 
