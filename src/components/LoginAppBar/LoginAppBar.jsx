@@ -1,3 +1,7 @@
+/**
+ * @overview Login link in AppBar.
+ */
+
 // Core
 import React from 'react';
 

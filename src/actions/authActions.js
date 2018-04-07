@@ -55,7 +55,6 @@ export function loginUser(credentials) {
         dispatch(loginSuccess());
       })
       .catch((error) => {
-        console.log(error);
         dispatch(loginError(error));
       });
   };

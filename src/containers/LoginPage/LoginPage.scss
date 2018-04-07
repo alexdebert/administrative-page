@@ -12,13 +12,19 @@
 }
 
 .LoginMessage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  height: 50px;
+  border-radius: 5px;
 }
 
 .LoginMessage--error {
-  font-size: 20px;
-  line-height: 12px;
-  color: rgb(244, 67, 54);
+  font-size: 15px;
 }
 
 .Login__form {

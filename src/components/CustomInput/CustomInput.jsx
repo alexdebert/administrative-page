@@ -2,8 +2,11 @@
  * @overview Custom input.
  */
 
+// Core
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// Components
 import TextField from 'material-ui/TextField';
 
 const CustomInput = ({

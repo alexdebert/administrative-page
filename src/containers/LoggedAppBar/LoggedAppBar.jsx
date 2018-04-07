@@ -1,3 +1,7 @@
+/**
+ * @overview Logged icon in AppBar.
+ */
+
 // Core
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -26,8 +30,8 @@ class LoggedAppBar extends Component {
         targetOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
       >
-        <Link to="/administrative">
-          <MenuItem primaryText="Administrate" />
+        <Link to="/administrate">
+          <MenuItem primaryText="Administrate" className="MenuItemLink--undecorated" />
         </Link>
         <MenuItem onClick={() => this.handleSignOut()} primaryText="Sign out" />
       </IconMenu>
@@ -38,8 +42,5 @@ class LoggedAppBar extends Component {
 LoggedAppBar.propTypes = {
   logoutUser: PropTypes.func.isRequired,
 };
-
-LoggedAppBar.muiName = 'IconMenu';
-
 
 export default connect(null, { logoutUser })(LoggedAppBar);

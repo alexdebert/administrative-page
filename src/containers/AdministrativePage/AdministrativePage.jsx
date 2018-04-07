@@ -2,6 +2,7 @@
  * @overview Administrative Page.
  */
 
+// Core
 import React from 'react';
 
 const Administrative = () => (

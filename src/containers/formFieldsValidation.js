@@ -2,7 +2,6 @@
  * @overview Form fields validation.
  */
 
-
 export function validate(values) {
   const errors = {};
 
