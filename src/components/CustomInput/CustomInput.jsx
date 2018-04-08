@@ -26,7 +26,6 @@ const CustomInput = ({
   />
 );
 
-
 CustomInput.propTypes = {
   input: PropTypes.shape({}),
   meta: PropTypes.shape({

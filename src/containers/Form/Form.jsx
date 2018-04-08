@@ -15,8 +15,8 @@ import CustomInput from '../../components/CustomInput/CustomInput';
 // Styles
 import './Form.scss';
 
-// Validation
-import { validate } from '../formFieldsValidation';
+// Utils
+import { validate } from '../../utils/formFieldsValidation';
 
 class Form extends React.Component {
   constructor() {
@@ -25,8 +25,7 @@ class Form extends React.Component {
   }
 
   handleFormSubmit(values) {
-    console.log(values);
-    console.log(this);
+    // this.props.addCustomer(values);
   }
 
   render() {
@@ -61,10 +60,11 @@ class Form extends React.Component {
 }
 
 Form.propTypes = {
+  addCustomer: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 };
 
-export default connect(null, {})(reduxForm({
+export default connect(null, { addCustomer })(reduxForm({
   form: 'customerForm',
   validate,
 })(Form));

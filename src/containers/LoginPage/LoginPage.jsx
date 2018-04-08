@@ -18,7 +18,7 @@ import { loginUser } from '../../actions/authActions';
 import './LoginPage.scss';
 
 // Validation
-import { validate } from '../formFieldsValidation';
+import { validate } from '../../utils/formFieldsValidation';
 
 class LoginPage extends Component {
   constructor() {
@@ -67,11 +67,11 @@ LoginPage.defaultProps = {
   authenticationError: '',
 };
 
-function mapStateToProps(state) {
-  return {
+const mapStateToProps = state => (
+  {
     authenticationError: state.auth.error,
-  };
-}
+  }
+);
 
 export default connect(mapStateToProps, { loginUser })(reduxForm({
   form: 'login',

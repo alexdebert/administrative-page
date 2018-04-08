@@ -17,6 +17,9 @@ import MoreVertIcon from '../../../node_modules/material-ui/svg-icons/navigation
 // Actions
 import { logoutUser } from '../../actions/authActions';
 
+// Styles
+import './LoggedAppBar.scss';
+
 class LoggedAppBar extends Component {
   handleSignOut() {
     this.props.logoutUser();
@@ -30,8 +33,8 @@ class LoggedAppBar extends Component {
         targetOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
       >
-        <Link to="/administrate">
-          <MenuItem primaryText="Administrate" className="MenuItemLink--undecorated" />
+        <Link to="/administrate" className="MenuItemLink--undecorated">
+          <MenuItem primaryText="Administrate" />
         </Link>
         <MenuItem onClick={() => this.handleSignOut()} primaryText="Sign out" />
       </IconMenu>

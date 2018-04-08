@@ -11,7 +11,7 @@ const path = require('path');
 const OUTPUT_PATH = 'dist';
 
 const config = {
-	entry: './src/index.js',
+	entry: ['babel-polyfill', './src/index.js'],
 
 	output: {
 		path: path.resolve(__dirname, OUTPUT_PATH),
