@@ -22,6 +22,7 @@ import './Form.scss';
 
 // Utils
 import { validate } from '../../utils/formFieldsValidation';
+import { loggerAction } from '../../utils/logger';
 
 const afterSubmit = (result, dispatch) => dispatch(reset('customerForm'));
 
@@ -35,8 +36,17 @@ class Form extends React.Component {
     this.handleRequestClose = this.handleRequestClose.bind(this);
   }
 
+  componentDidMount() {
+    this.props.loggerAction('CUSTOMER_FORM', '_CREATED');
+  }
+
+  componentWillUnmount() {
+    this.props.loggerAction('CUSTOMER_FORM', '_UNFILLED_LEAVE_PAGE');
+  }
+
   handleFormSubmit(values) {
     this.props.addCustomer(values);
+    this.props.loggerAction('CUSTOMER_FORM', '_SUBMITTED');
     this.setState({
       open: true,
     });
@@ -88,6 +98,7 @@ class Form extends React.Component {
 Form.propTypes = {
   addCustomer: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  loggerAction: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => (
@@ -99,5 +110,6 @@ const mapDispatchToProps = dispatch => (
 export default connect(null, mapDispatchToProps)(reduxForm({
   form: 'customerForm',
   validate,
+  loggerAction,
   onSubmitSuccess: afterSubmit,
 })(Form));

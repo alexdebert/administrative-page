@@ -9,7 +9,7 @@ import { createStore, compose, applyMiddleware } from 'redux';
 import rootReducer from './reducers/index';
 
 // Actions
-import { loggerAction } from './actions/loggerActions';
+import { loggerAction } from './utils/logger';
 
 export const history = createHistory();
 
@@ -20,7 +20,6 @@ export function configureStore(initialState) {
     compose(applyMiddleware(reduxThunk, routerMiddleware(history))),
   );
 
-  console.log('ok?', loggerAction());
   loggerAction('ACCESS_APPLICATION');
 
   return store;

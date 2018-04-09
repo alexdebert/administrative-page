@@ -32,12 +32,14 @@ function loginWithUserNameAndPassword(credentials) {
 export function logoutUser() {
   return {
     type: SIGN_OUT_USER,
+    log: SIGN_OUT_USER,
   };
 }
 
 export function loginSuccess() {
   return {
     type: LOGIN_SUCCESS,
+    log: LOGIN_SUCCESS,
   };
 }
 

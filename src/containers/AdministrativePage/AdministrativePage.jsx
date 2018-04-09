@@ -16,12 +16,16 @@ import CustomerModal from '../../components/CustomerModal/CustomerModal';
 import { getCustomers, addCustomer } from '../../actions/customerActions';
 import { openModal, closeModal } from '../../actions/modalActions';
 
+// Utils
+import { loggerAction } from '../../utils/logger';
+
 // Styles
 import './AdministrativePage.scss';
 
 class Administrative extends Component {
   componentDidMount() {
     this.props.getCustomers();
+    this.props.loggerAction('Administrative interface');
   }
 
   renderCustomerList() {
@@ -51,6 +55,7 @@ class Administrative extends Component {
 Administrative.propTypes = {
   customers: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   getCustomers: PropTypes.func.isRequired,
+  loggerAction: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
   selectedCustomer: PropTypes.shape({}),
@@ -70,6 +75,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
     getCustomers,
+    loggerAction,
     addCustomer,
     openModal,
     closeModal,
