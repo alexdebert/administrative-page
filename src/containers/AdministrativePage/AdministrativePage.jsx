@@ -13,7 +13,7 @@ import CustomerList from '../../components/CustomerList/CustomerList';
 import CustomerModal from '../../components/CustomerModal/CustomerModal';
 
 // Actions
-import { getCustomers } from '../../actions/customerActions';
+import { getCustomers, addCustomer } from '../../actions/customerActions';
 import { openModal, closeModal } from '../../actions/modalActions';
 
 // Styles
@@ -34,7 +34,6 @@ class Administrative extends Component {
   }
 
   render() {
-    console.log('selectedCustomer in Ad', this.props);
     return (
       <div className="AdministrativePage">
         <h2>Administrate Customers</h2>
@@ -71,6 +70,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
     getCustomers,
+    addCustomer,
     openModal,
     closeModal,
   }, dispatch)

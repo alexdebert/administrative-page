@@ -21,7 +21,7 @@ export function addCustomer(customerData) {
         });
       })
       .catch((error) => {
-        console.log(error);
+        throw error;
       });
   };
 }
@@ -36,7 +36,7 @@ export function getCustomers() {
         });
       })
       .catch((error) => {
-        console.log(error);
+        throw error;
       });
   };
 }
