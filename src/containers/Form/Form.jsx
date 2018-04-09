@@ -5,12 +5,13 @@
 // Core
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reset, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 // Components
 import RaisedButton from 'material-ui/RaisedButton';
+import Snackbar from 'material-ui/Snackbar';
 import CustomInput from '../../components/CustomInput/CustomInput';
 
 // Actions
@@ -22,14 +23,29 @@ import './Form.scss';
 // Utils
 import { validate } from '../../utils/formFieldsValidation';
 
+const afterSubmit = (result, dispatch) => dispatch(reset('customerForm'));
+
 class Form extends React.Component {
   constructor() {
     super();
+    this.state = {
+      open: false,
+    };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleRequestClose = this.handleRequestClose.bind(this);
   }
 
   handleFormSubmit(values) {
     this.props.addCustomer(values);
+    this.setState({
+      open: true,
+    });
+  }
+
+  handleRequestClose() {
+    this.setState({
+      open: false,
+    });
   }
 
   render() {
@@ -58,6 +74,12 @@ class Form extends React.Component {
           />
           <RaisedButton className="CustomerForm__button" label="Submit" type="submit" primary={isPrimary} />
         </form>
+        <Snackbar
+          open={this.state.open}
+          message="Form submitted successfully"
+          autoHideDuration={4000}
+          onRequestClose={this.handleRequestClose}
+        />
       </div>
     );
   }
@@ -77,4 +99,5 @@ const mapDispatchToProps = dispatch => (
 export default connect(null, mapDispatchToProps)(reduxForm({
   form: 'customerForm',
   validate,
+  onSubmitSuccess: afterSubmit,
 })(Form));
