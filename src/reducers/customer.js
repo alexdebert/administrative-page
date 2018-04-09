@@ -17,7 +17,7 @@ export default function customers(state = initialState, action = {}) {
       };
     case ADD_CUSTOMER:
       return {
-        data: [...state.customers,
+        data: [...state.data,
           {
             id: action.id,
             customerData: action.data,

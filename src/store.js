@@ -8,6 +8,9 @@ import { routerMiddleware } from 'react-router-redux';
 import { createStore, compose, applyMiddleware } from 'redux';
 import rootReducer from './reducers/index';
 
+// Actions
+import { loggerAction } from './actions/loggerActions';
+
 export const history = createHistory();
 
 export function configureStore(initialState) {
@@ -16,6 +19,9 @@ export function configureStore(initialState) {
     initialState,
     compose(applyMiddleware(reduxThunk, routerMiddleware(history))),
   );
+
+  console.log('ok?', loggerAction());
+  loggerAction('ACCESS_APPLICATION');
 
   return store;
 }
