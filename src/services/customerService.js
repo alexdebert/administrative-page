@@ -4,12 +4,13 @@
 
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:9001/customers/';
+// Constants
+import { BASE_URL } from '../constants/constants';
 
 export const postCustomer = customerData => (
-  axios.post(BASE_URL, customerData)
+  axios.post(`${BASE_URL}/customers`, customerData)
 );
 
 export const fetchCustomers = () => (
-  axios.get(BASE_URL)
+  axios.get(`${BASE_URL}/customers`)
 );

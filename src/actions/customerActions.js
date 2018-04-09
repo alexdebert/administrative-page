@@ -5,8 +5,8 @@
 // Services
 import { postCustomer, fetchCustomers } from '../services/customerService';
 
-export const ADD_CUSTOMER = 'ADD_CUSTOMER';
-export const GET_CUSTOMERS = 'GET_CUSTOMERS';
+// Constants
+import * as actionTypes from '../constants/action-types';
 
 let nextCustomerId = 0;
 
@@ -15,7 +15,7 @@ export function addCustomer(customerData) {
     postCustomer(customerData)
       .then((response) => {
         dispatch({
-          type: 'ADD_CUSTOMER',
+          type: actionTypes.ADD_CUSTOMER,
           id: nextCustomerId += 1,
           data: response.data,
         });
@@ -31,7 +31,7 @@ export function getCustomers() {
     fetchCustomers()
       .then((response) => {
         dispatch({
-          type: 'GET_CUSTOMERS',
+          type: actionTypes.GET_CUSTOMERS,
           data: response.data,
         });
       })

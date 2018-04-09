@@ -2,18 +2,18 @@
  * @overview Modal actions.
  */
 
-export const OPEN_MODAL = 'OPEN_MODAL';
-export const CLOSE_MODAL = 'CLOSE_MODAL';
+// Constants
+import * as actionTypes from '../constants/action-types';
 
 export function openModal(customer) {
   return {
-    type: OPEN_MODAL,
+    type: actionTypes.OPEN_MODAL,
     customer,
   };
 }
 
 export function closeModal() {
   return {
-    type: CLOSE_MODAL,
+    type: actionTypes.CLOSE_MODAL,
   };
 }

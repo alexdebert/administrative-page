@@ -2,6 +2,7 @@
  * @overview Customer List Item.
  */
 
+// Core
 import React from 'react';
 import PropTypes from 'prop-types';
 

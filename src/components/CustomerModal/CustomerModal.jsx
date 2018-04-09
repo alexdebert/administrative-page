@@ -10,6 +10,9 @@ import PropTypes from 'prop-types';
 // Components
 import RaisedButton from 'material-ui/RaisedButton';
 
+// Constants
+import { CLOSE } from '../../constants/constants';
+
 // Styles
 import './CustomerModal.scss';
 
@@ -42,7 +45,7 @@ const CustomerModal = (props) => {
         <p><strong>Comments:</strong> { selectedCustomer.comments }</p>
         <RaisedButton
           className="CustomerModal__button"
-          label="Close"
+          label={CLOSE}
           primary={isPrimary}
           onClick={() => props.onRequestClose()}
         />

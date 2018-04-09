@@ -19,13 +19,16 @@ import { openModal, closeModal } from '../../actions/modalActions';
 // Utils
 import { loggerAction } from '../../utils/logger';
 
+// Constants
+import { ADMINISTRATIVE_INTERFACE } from '../../constants/constants';
+
 // Styles
 import './AdministrativePage.scss';
 
 class Administrative extends Component {
   componentDidMount() {
     this.props.getCustomers();
-    this.props.loggerAction('Administrative interface');
+    this.props.loggerAction(ADMINISTRATIVE_INTERFACE);
   }
 
   renderCustomerList() {

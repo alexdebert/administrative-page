@@ -17,6 +17,10 @@ import CustomInput from '../../components/CustomInput/CustomInput';
 // Actions
 import { addCustomer } from '../../actions/customerActions';
 
+// Constants
+import * as actionTypes from '../../constants/action-types';
+import * as constants from '../../constants/constants';
+
 // Styles
 import './Form.scss';
 
@@ -37,16 +41,17 @@ class Form extends React.Component {
   }
 
   componentDidMount() {
-    this.props.loggerAction('CUSTOMER_FORM', '_CREATED');
+    this.props.loggerAction(actionTypes.CUSTOMER_FORM, actionTypes.CUSTOMER_FORM_CREATED);
   }
 
   componentWillUnmount() {
-    this.props.loggerAction('CUSTOMER_FORM', '_UNFILLED_LEAVE_PAGE');
+    this.props
+      .loggerAction(actionTypes.CUSTOMER_FORM, actionTypes.CUSTOMER_FORM_UNFILLED_LEAVE_PAGE);
   }
 
   handleFormSubmit(values) {
     this.props.addCustomer(values);
-    this.props.loggerAction('CUSTOMER_FORM', '_SUBMITTED');
+    this.props.loggerAction(actionTypes.CUSTOMER_FORM, actionTypes.CUSTOMER_FORM_SUBMITTED);
     this.setState({
       open: true,
     });
@@ -65,24 +70,24 @@ class Form extends React.Component {
       <div className="CustomerForm__container">
         <h2 className="text-center">Customer Form</h2>
         <form className="CustomerForm" onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
-          <Field className="CustomerForm__field" name="firstName" label="First Name" component={CustomInput} type="text" />
-          <Field className="CustomerForm__field" name="lastName" label="Last Name" component={CustomInput} type="text" />
-          <Field className="CustomerForm__field" name="email" label="email" component={CustomInput} type="text" />
-          <Field className="CustomerForm__field" name="phoneNumber" label="Phone Number" component={CustomInput} type="text" />
-          <Field className="CustomerForm__field" name="address" label="Address" component={CustomInput} type="text" />
-          <Field className="CustomerForm__field" name="city" label="City" component={CustomInput} type="text" />
-          <Field className="CustomerForm__field" name="postalCode" label="Postal Code" component={CustomInput} type="text" />
-          <Field className="CustomerForm__field" name="country" label="Country" component={CustomInput} type="text" />
+          <Field className="CustomerForm__field" name="firstName" label={constants.FIRST_NAME} component={CustomInput} type="text" />
+          <Field className="CustomerForm__field" name="lastName" label={constants.LAST_NAME} component={CustomInput} type="text" />
+          <Field className="CustomerForm__field" name="email" label={constants.EMAIL} component={CustomInput} type="text" />
+          <Field className="CustomerForm__field" name="phoneNumber" label={constants.PHONE_NUMBER} component={CustomInput} type="text" />
+          <Field className="CustomerForm__field" name="address" label={constants.ADDRESS} component={CustomInput} type="text" />
+          <Field className="CustomerForm__field" name="city" label={constants.CITY}component={CustomInput} type="text" />
+          <Field className="CustomerForm__field" name="postalCode" label={constants.POSTAL_CODE} component={CustomInput} type="text" />
+          <Field className="CustomerForm__field" name="country" label={constants.COUNTRY}component={CustomInput} type="text" />
           <Field
             className="CustomerForm__field"
             name="comments"
-            label="Comments"
+            label={constants.COMMENTS}
             component={CustomInput}
             type="text"
             multiLine={isMultiLine}
             rows={2}
           />
-          <RaisedButton className="CustomerForm__button" label="Submit" type="submit" primary={isPrimary} />
+          <RaisedButton className="CustomerForm__button" label={constants.SUBMIT} type="submit" primary={isPrimary} />
         </form>
         <Snackbar
           open={this.state.open}
