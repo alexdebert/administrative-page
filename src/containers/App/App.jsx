@@ -8,6 +8,7 @@ import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 
 // Components
 import Header from '../Header/Header';
@@ -18,11 +19,15 @@ import Administrative from '../AdministrativePage/AdministrativePage';
 import PrivateRoute from '../../components/PrivateRoute/PrivateRoute';
 import PublicRoute from '../../components/PublicRoute/PublicRoute';
 
+// Actions
+import { getCustomers } from '../../actions/customerActions';
+
 // Styles
 import './App.scss';
 
 const App = (props) => {
   const isAuthenticated = props.authenticated;
+  const { customers } = props;
   return (
     <Router>
       <MuiThemeProvider>
@@ -33,7 +38,7 @@ const App = (props) => {
               <Route exact path="/" component={HomePage} />
               <Route exact path="/form" component={Form} />
               <PublicRoute authenticated={isAuthenticated} exact path="/login" component={LoginPage} />
-              <PrivateRoute authenticated={isAuthenticated} exact path="/administrate" component={Administrative} />
+              <PrivateRoute authenticated={isAuthenticated} customers={customers} exact path="/administrate" component={Administrative} />
             </Switch>
           </main>
         </div>
@@ -44,12 +49,20 @@ const App = (props) => {
 
 App.propTypes = {
   authenticated: PropTypes.bool.isRequired,
+  customers: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     authenticated: state.auth.authenticated,
+    customers: state.customers.data,
   };
 }
 
-export default connect(mapStateToProps, null)(App);
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    getCustomers,
+  }, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

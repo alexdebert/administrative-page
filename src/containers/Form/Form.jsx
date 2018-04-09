@@ -7,10 +7,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 // Components
 import RaisedButton from 'material-ui/RaisedButton';
 import CustomInput from '../../components/CustomInput/CustomInput';
+
+// Actions
+import { addCustomer } from '../../actions/customerActions';
 
 // Styles
 import './Form.scss';
@@ -25,7 +29,7 @@ class Form extends React.Component {
   }
 
   handleFormSubmit(values) {
-    // this.props.addCustomer(values);
+    this.props.addCustomer(values);
   }
 
   render() {
@@ -64,7 +68,13 @@ Form.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
 };
 
-export default connect(null, { addCustomer })(reduxForm({
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    addCustomer,
+  }, dispatch)
+);
+
+export default connect(null, mapDispatchToProps)(reduxForm({
   form: 'customerForm',
   validate,
 })(Form));
