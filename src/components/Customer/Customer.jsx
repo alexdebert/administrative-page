@@ -14,12 +14,13 @@ const Customer = (props) => {
   const fullName = `${firstName} ${lastName}`;
 
   return (
-    <ListItem>{fullName}</ListItem>
+    <ListItem onClick={() => props.onCustomerSelected(props.customer)}>{fullName}</ListItem>
   );
 };
 
 Customer.propTypes = {
   customer: PropTypes.shape({}).isRequired,
+  onCustomerSelected: PropTypes.func.isRequired,
 };
 
 export default Customer;

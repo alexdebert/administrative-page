@@ -15,6 +15,7 @@ const CustomerList = (props) => {
     <Customer
       key={customer.id}
       customer={customer}
+      onCustomerSelected={props.onCustomerSelected}
     />
   ));
 
@@ -25,6 +26,7 @@ const CustomerList = (props) => {
 
 CustomerList.propTypes = {
   customers: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
+  onCustomerSelected: PropTypes.func.isRequired,
 };
 
 export default CustomerList;

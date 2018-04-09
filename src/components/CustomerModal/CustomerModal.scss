@@ -1,0 +1,31 @@
+/**
+ * @overview Customer Modal styles.
+ */
+
+.CustomerModal {
+  position: absolute;
+  top: 80px;
+  left: 40px;
+  right: 40px;
+  bottom: 40px;
+  border: 1px solid rgb(204, 204, 204);
+  background: rgb(255, 255, 255);
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  padding: 3%;
+}
+
+.CustomerModal__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.CustomerModal__title {
+  text-align: center;
+}
+
+.CustomerModal__button {
+  width: 10%;
+  align-self: center;
+}

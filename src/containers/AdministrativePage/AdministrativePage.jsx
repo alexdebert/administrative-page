@@ -10,9 +10,11 @@ import { bindActionCreators } from 'redux';
 
 // Components
 import CustomerList from '../../components/CustomerList/CustomerList';
+import CustomerModal from '../../components/CustomerModal/CustomerModal';
 
 // Actions
 import { getCustomers } from '../../actions/customerActions';
+import { openModal, closeModal } from '../../actions/modalActions';
 
 // Styles
 import './AdministrativePage.scss';
@@ -25,14 +27,23 @@ class Administrative extends Component {
   renderCustomerList() {
     const { customers } = this.props;
     return customers.length > 0 ?
-      (<CustomerList customers={customers} />) : (<span>No customer registered yet.</span>);
+      (<CustomerList
+        onCustomerSelected={selectedCustomer => this.props.openModal({ selectedCustomer })}
+        customers={customers}
+      />) : (<span>No customer registered yet.</span>);
   }
 
   render() {
+    console.log('selectedCustomer in Ad', this.props);
     return (
       <div className="AdministrativePage">
         <h2>Administrate Customers</h2>
         { this.renderCustomerList() }
+        <CustomerModal
+          modalIsOpen={this.props.modalIsOpen}
+          selectedCustomer={this.props.selectedCustomer}
+          onRequestClose={() => this.props.closeModal()}
+        />
       </div>
     );
   }
@@ -41,12 +52,28 @@ class Administrative extends Component {
 Administrative.propTypes = {
   customers: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   getCustomers: PropTypes.func.isRequired,
+  openModal: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  selectedCustomer: PropTypes.shape({}),
+  modalIsOpen: PropTypes.bool.isRequired,
 };
+
+Administrative.defaultProps = {
+  selectedCustomer: {},
+};
+
+const mapStateToProps = state => ({
+  customers: state.customers.data,
+  modalIsOpen: state.modal.modalIsOpen,
+  selectedCustomer: state.modal.selectedCustomer,
+});
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
     getCustomers,
+    openModal,
+    closeModal,
   }, dispatch)
 );
 
-export default connect(null, mapDispatchToProps)(Administrative);
+export default connect(mapStateToProps, mapDispatchToProps)(Administrative);
