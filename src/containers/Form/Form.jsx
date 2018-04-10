@@ -34,20 +34,36 @@ class Form extends React.Component {
     super();
     this.state = {
       open: false,
+      timer: null,
     };
 
-    this.timer = setTimeout(() => this.props.customerFormTimeoutLog(), 3600000);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleRequestClose = this.handleRequestClose.bind(this);
+    this.startTimer = this.startTimer.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
     this.props.customerFormCreatedLog();
+    this.startTimer();
   }
 
   componentWillUnmount() {
     this.props.leaveFormPageLog();
-    clearTimeout(this.timer);
+    clearTimeout(this.state.timer);
+  }
+
+  startTimer() {
+    const timer = setTimeout(() => this.props.customerFormTimeoutLog(), 3600000);
+
+    this.setState({
+      timer,
+    });
+  }
+
+  handleChange() {
+    clearTimeout(this.state.timer);
+    this.startTimer();
   }
 
   handleFormSubmit(values) {
@@ -71,18 +87,19 @@ class Form extends React.Component {
       <div className="CustomerForm__container">
         <h2 className="text-center">Customer Form</h2>
         <form className="CustomerForm" onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
-          <Field className="CustomerForm__field" name="firstName" label={constants.FIRST_NAME} component={CustomInput} type="text" />
-          <Field className="CustomerForm__field" name="lastName" label={constants.LAST_NAME} component={CustomInput} type="text" />
-          <Field className="CustomerForm__field" name="email" label={constants.EMAIL} component={CustomInput} type="text" />
-          <Field className="CustomerForm__field" name="phoneNumber" label={constants.PHONE_NUMBER} component={CustomInput} type="text" />
-          <Field className="CustomerForm__field" name="address" label={constants.ADDRESS} component={CustomInput} type="text" />
-          <Field className="CustomerForm__field" name="city" label={constants.CITY}component={CustomInput} type="text" />
-          <Field className="CustomerForm__field" name="postalCode" label={constants.POSTAL_CODE} component={CustomInput} type="text" />
-          <Field className="CustomerForm__field" name="country" label={constants.COUNTRY}component={CustomInput} type="text" />
+          <Field className="CustomerForm__field" name="firstName" label={constants.FIRST_NAME} onChange={this.handleChange} component={CustomInput} type="text" />
+          <Field className="CustomerForm__field" name="lastName" label={constants.LAST_NAME} onChange={this.handleChange} component={CustomInput} type="text" />
+          <Field className="CustomerForm__field" name="email" label={constants.EMAIL} onChange={this.handleChange} component={CustomInput} type="text" />
+          <Field className="CustomerForm__field" name="phoneNumber" label={constants.PHONE_NUMBER} onChange={this.handleChange} component={CustomInput} type="text" />
+          <Field className="CustomerForm__field" name="address" label={constants.ADDRESS} onChange={this.handleChange} component={CustomInput} type="text" />
+          <Field className="CustomerForm__field" name="city" label={constants.CITY} onChange={this.handleChange} component={CustomInput} type="text" />
+          <Field className="CustomerForm__field" name="postalCode" label={constants.POSTAL_CODE} onChange={this.handleChange} component={CustomInput} type="text" />
+          <Field className="CustomerForm__field" name="country" label={constants.COUNTRY} onChange={this.handleChange} component={CustomInput} type="text" />
           <Field
             className="CustomerForm__field"
             name="comments"
             label={constants.COMMENTS}
+            onChange={this.handleChange}
             component={CustomInput}
             type="text"
             multiLine={isMultiLine}
