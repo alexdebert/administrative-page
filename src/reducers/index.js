@@ -10,6 +10,7 @@ import { reducer as FormReducer } from 'redux-form';
 import AuthReducer from './auth';
 import CustomerReducer from './customer';
 import ModalReducer from './modal';
+import LoggerReducer from './logger';
 
 const rootReducer = combineReducers({
   auth: AuthReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   form: FormReducer,
   router: routerReducer,
   modal: ModalReducer,
+  logger: LoggerReducer,
 });
 
 export default rootReducer;

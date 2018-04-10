@@ -15,12 +15,7 @@ import CustomerModal from '../../components/CustomerModal/CustomerModal';
 // Actions
 import { getCustomers, addCustomer } from '../../actions/customerActions';
 import { openModal, closeModal } from '../../actions/modalActions';
-
-// Utils
-import { loggerAction } from '../../utils/logger';
-
-// Constants
-import { ADMINISTRATIVE_INTERFACE } from '../../constants/constants';
+import { accessAdministrativePageLog } from '../../actions/loggerActions';
 
 // Styles
 import './AdministrativePage.scss';
@@ -28,7 +23,7 @@ import './AdministrativePage.scss';
 class Administrative extends Component {
   componentDidMount() {
     this.props.getCustomers();
-    this.props.loggerAction(ADMINISTRATIVE_INTERFACE);
+    this.props.accessAdministrativePageLog();
   }
 
   renderCustomerList() {
@@ -58,7 +53,7 @@ class Administrative extends Component {
 Administrative.propTypes = {
   customers: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   getCustomers: PropTypes.func.isRequired,
-  loggerAction: PropTypes.func.isRequired,
+  accessAdministrativePageLog: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
   selectedCustomer: PropTypes.shape({}),
@@ -78,7 +73,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
     getCustomers,
-    loggerAction,
+    accessAdministrativePageLog,
     addCustomer,
     openModal,
     closeModal,

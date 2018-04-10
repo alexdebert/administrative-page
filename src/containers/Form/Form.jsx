@@ -16,9 +16,9 @@ import CustomInput from '../../components/CustomInput/CustomInput';
 
 // Actions
 import { addCustomer } from '../../actions/customerActions';
+import { leaveFormPageLog, formSubmittedLog, customerFormCreatedLog, customerFormTimeoutLog } from '../../actions/loggerActions';
 
 // Constants
-import * as actionTypes from '../../constants/action-types';
 import * as constants from '../../constants/constants';
 
 // Styles
@@ -26,7 +26,6 @@ import './Form.scss';
 
 // Utils
 import { validate } from '../../utils/formFieldsValidation';
-import { loggerAction } from '../../utils/logger';
 
 const afterSubmit = (result, dispatch) => dispatch(reset('customerForm'));
 
@@ -36,22 +35,24 @@ class Form extends React.Component {
     this.state = {
       open: false,
     };
+
+    this.timer = setTimeout(() => this.props.customerFormTimeoutLog(), 5000);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleRequestClose = this.handleRequestClose.bind(this);
   }
 
   componentDidMount() {
-    this.props.loggerAction(actionTypes.CUSTOMER_FORM, actionTypes.CUSTOMER_FORM_CREATED);
+    this.props.customerFormCreatedLog();
   }
 
   componentWillUnmount() {
-    this.props
-      .loggerAction(actionTypes.CUSTOMER_FORM, actionTypes.CUSTOMER_FORM_UNFILLED_LEAVE_PAGE);
+    this.props.leaveFormPageLog();
+    clearTimeout(this.timer);
   }
 
   handleFormSubmit(values) {
     this.props.addCustomer(values);
-    this.props.loggerAction(actionTypes.CUSTOMER_FORM, actionTypes.CUSTOMER_FORM_SUBMITTED);
+    this.props.formSubmittedLog();
     this.setState({
       open: true,
     });
@@ -103,18 +104,24 @@ class Form extends React.Component {
 Form.propTypes = {
   addCustomer: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  loggerAction: PropTypes.func.isRequired,
+  leaveFormPageLog: PropTypes.func.isRequired,
+  formSubmittedLog: PropTypes.func.isRequired,
+  customerFormCreatedLog: PropTypes.func.isRequired,
+  customerFormTimeoutLog: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
     addCustomer,
+    customerFormCreatedLog,
+    formSubmittedLog,
+    customerFormTimeoutLog,
+    leaveFormPageLog,
   }, dispatch)
 );
 
 export default connect(null, mapDispatchToProps)(reduxForm({
   form: 'customerForm',
   validate,
-  loggerAction,
   onSubmitSuccess: afterSubmit,
 })(Form));
