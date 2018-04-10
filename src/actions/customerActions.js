@@ -11,7 +11,7 @@ import * as actionTypes from '../constants/action-types';
 let nextCustomerId = 0;
 
 export function addCustomer(customerData) {
-  return function (dispatch) {
+  return (dispatch) => {
     postCustomer(customerData)
       .then((response) => {
         dispatch({
@@ -27,7 +27,7 @@ export function addCustomer(customerData) {
 }
 
 export function getCustomers() {
-  return function (dispatch) {
+  return (dispatch) => {
     fetchCustomers()
       .then((response) => {
         dispatch({

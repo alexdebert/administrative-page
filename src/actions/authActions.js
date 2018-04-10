@@ -48,7 +48,7 @@ export function loginError(error) {
 }
 
 export function loginUser(credentials) {
-  return function (dispatch) {
+  return (dispatch) => {
     loginWithUserNameAndPassword(credentials)
       .then(() => {
         dispatch(loginSuccess());
