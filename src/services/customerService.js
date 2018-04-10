@@ -8,9 +8,9 @@ import axios from 'axios';
 import { BASE_URL } from '../constants/constants';
 
 export const postCustomer = customerData => (
-  axios.post(`${BASE_URL}/customers`, customerData)
+  axios.post(`${BASE_URL}customers`, customerData)
 );
 
 export const fetchCustomers = () => (
-  axios.get(`${BASE_URL}/customers`)
+  axios.get(`${BASE_URL}customers`)
 );

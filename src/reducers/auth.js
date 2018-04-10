@@ -2,7 +2,10 @@
  * @overview Authentication reducer.
  */
 
-import { LOGIN_SUCCESS, SIGN_OUT_USER, LOGIN_ERROR } from '../actions/authActions';
+// Constants
+import * as actionTypes from '../constants/action-types';
+
+// Utils
 import { loggerAction } from '../utils/logger';
 
 const initialState = {
@@ -13,21 +16,21 @@ const initialState = {
 
 export default function auth(state = initialState, action = {}) {
   switch (action.type) {
-    case LOGIN_SUCCESS:
+    case actionTypes.LOGIN_SUCCESS:
       return {
         ...state,
         authenticated: true,
         error: null,
         log: loggerAction(action.log),
       };
-    case SIGN_OUT_USER:
+    case actionTypes.SIGN_OUT_USER:
       return {
         ...state,
         authenticated: false,
         error: null,
         log: loggerAction(action.log),
       };
-    case LOGIN_ERROR:
+    case actionTypes.LOGIN_ERROR:
       return {
         ...state,
         error: action.payload,

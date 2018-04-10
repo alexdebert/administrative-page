@@ -2,7 +2,8 @@
  * @overview Customer reducer.
  */
 
-import { ADD_CUSTOMER, GET_CUSTOMERS } from '../actions/customerActions';
+// Constants
+import * as actionTypes from '../constants/action-types';
 
 const initialState = {
   data: [],
@@ -10,12 +11,12 @@ const initialState = {
 
 export default function customers(state = initialState, action = {}) {
   switch (action.type) {
-    case GET_CUSTOMERS:
+    case actionTypes.GET_CUSTOMERS:
       return {
         ...state,
         data: action.data,
       };
-    case ADD_CUSTOMER:
+    case actionTypes.ADD_CUSTOMER:
       return {
         data: [...state.data,
           {

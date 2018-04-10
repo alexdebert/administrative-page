@@ -20,7 +20,7 @@ function validateLogin(data, credentials) {
 }
 
 function loginWithUserNameAndPassword(credentials) {
-  return axios.get(`${constants.BASE_URL}/users`)
+  return axios.get(`${constants.BASE_URL}users`)
     .then((response) => {
       validateLogin(response.data[0], credentials);
     });

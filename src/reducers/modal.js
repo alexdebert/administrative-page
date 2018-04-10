@@ -2,7 +2,8 @@
  * @overview Modal reducer.
  */
 
-import { OPEN_MODAL, CLOSE_MODAL } from '../actions/modalActions';
+// Constants
+import * as actionTypes from '../constants/action-types';
 
 const initialState = {
   selectedCustomer: null,
@@ -11,13 +12,13 @@ const initialState = {
 
 export default function modal(state = initialState, action = {}) {
   switch (action.type) {
-    case OPEN_MODAL:
+    case actionTypes.OPEN_MODAL:
       return {
         ...state,
         modalIsOpen: true,
         selectedCustomer: action.customer.selectedCustomer,
       };
-    case CLOSE_MODAL:
+    case actionTypes.CLOSE_MODAL:
       return {
         ...state,
         modalIsOpen: false,
