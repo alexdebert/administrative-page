@@ -36,7 +36,7 @@ class Form extends React.Component {
       open: false,
     };
 
-    this.timer = setTimeout(() => this.props.customerFormTimeoutLog(), 5000);
+    this.timer = setTimeout(() => this.props.customerFormTimeoutLog(), 3600000);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleRequestClose = this.handleRequestClose.bind(this);
   }
